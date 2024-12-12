@@ -28,6 +28,8 @@ class MainActivity : ComponentActivity() {
 fun GeometryCalculatorApp() {
     var side by remember { mutableStateOf("") }
     var radius by remember { mutableStateOf("") }
+    var width by remember { mutableStateOf("") }
+    var height by remember { mutableStateOf("") }
     var areaResult by remember { mutableStateOf("") }
 
     Column(
@@ -80,6 +82,37 @@ fun GeometryCalculatorApp() {
             }
         }) {
             Text("Calculate Circle Area")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Rectangle Input and Calculation
+        TextField(
+            value = width,
+            onValueChange = { width = it },
+            label = { Text("Width of Rectangle") }
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        TextField(
+            value = height,
+            onValueChange = { height = it },
+            label = { Text("Height of Rectangle") }
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Button(onClick = {
+            areaResult = if (width.isNotEmpty() && height.isNotEmpty()) {
+                val w = width.toDouble()
+                val h = height.toDouble()
+                "Rectangle Area: ${w * h}"
+            } else {
+                "Please enter valid width and height"
+            }
+        }) {
+            Text("Calculate Rectangle Area")
         }
 
         Spacer(modifier = Modifier.height(16.dp))

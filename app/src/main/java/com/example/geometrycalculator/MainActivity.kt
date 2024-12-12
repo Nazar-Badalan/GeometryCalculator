@@ -30,6 +30,8 @@ fun GeometryCalculatorApp() {
     var radius by remember { mutableStateOf("") }
     var width by remember { mutableStateOf("") }
     var height by remember { mutableStateOf("") }
+    var base by remember { mutableStateOf("") }
+    var triangleHeight by remember { mutableStateOf("") }
     var areaResult by remember { mutableStateOf("") }
 
     Column(
@@ -113,6 +115,37 @@ fun GeometryCalculatorApp() {
             }
         }) {
             Text("Calculate Rectangle Area")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Triangle Input and Calculation
+        TextField(
+            value = base,
+            onValueChange = { base = it },
+            label = { Text("Base of Triangle") }
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        TextField(
+            value = triangleHeight,
+            onValueChange = { triangleHeight = it },
+            label = { Text("Height of Triangle") }
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Button(onClick = {
+            areaResult = if (base.isNotEmpty() && triangleHeight.isNotEmpty()) {
+                val b = base.toDouble()
+                val h = triangleHeight.toDouble()
+                "Triangle Area: ${(b * h) / 2}"
+            } else {
+                "Please enter valid base and height"
+            }
+        }) {
+            Text("Calculate Triangle Area")
         }
 
         Spacer(modifier = Modifier.height(16.dp))
